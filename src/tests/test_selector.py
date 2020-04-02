@@ -17,11 +17,17 @@ class SelectorTest(unittest.TestCase):
         os.remove(self.filename)
     
     def test_selects_movie_from_list(self):
-        movies = self.movies
-        movie = selector.choose(movies)
+        movie = selector.choose(self.movies)
 
-        self.assertIn(movie, movies)
+        self.assertIn(movie, self.movies)
         self.assertIsInstance(movie, str)
+
+    def test_converts_a_path_to_a_csv_into_a_list_with_contents_of_the_file(self):
+        contents = selector.read_csv(self.filename)
+        self.assertIsInstance(contents, list)
+        self.assertEqual(contents, self.movies)
+
+        
         
 
     
