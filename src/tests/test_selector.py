@@ -1,18 +1,29 @@
 #!/usr/bin/env python3
 
 import unittest
+import os
 from src.main import selector
 
 class SelectorTest(unittest.TestCase):
 
-    def test_selects_movie_from_list(self):
-        movies = ["a", "n", "k", "h", "o"]
+    
+    def setUp(self):
+        self.movies = ["movie 1", "another movie", "a good movie", "a bad movie", "terrible movie"]
+        self.filename = "test_file.csv"
+        with open(self.filename,"w") as f:
+            [f.write("{}\n".format(x)) for x in self.movies]
 
+    def tearDown(self):
+        os.remove(self.filename)
+    
+    def test_selects_movie_from_list(self):
+        movies = self.movies
         movie = selector.choose(movies)
 
         self.assertIn(movie, movies)
         self.assertIsInstance(movie, str)
         
 
+    
 if __name__ == '__main__':
     unittest.main()
