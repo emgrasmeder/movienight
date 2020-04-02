@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+
+__end_to_end_test() {
+    (
+        cd src/tests/
+        echo "I'm in folder $(pwd)"
+        echo "Tests should run here"
+    )
+}
+
+validate_args() {
+    acceptable_args="$(declare -F | sed -n "s/declare -f __//p" | tr '\n' ' ')"
+
+    if [[ -z $1 ]]; then
+        echo "Must provide an argument" 
+        echo -e "Available commands:\n$(declare -F | sed -n "s/declare -f __/ - /p")"
+        exit 1
+    fi
+    if [[ ! " $acceptable_args " =~ .*\ $1\ .* ]]; then
+        echo "Invalid argument: $1"
+        echo -e "Available commands:\n$(declare -F | sed -n "s/declare -f __/ - /p")"
+        exit 1
+    fi
+}
+
+CMD=${1:-}
+shift || true
+if validate_args ${CMD}; then
+    __${CMD}
+    exit 0
+fi
+
