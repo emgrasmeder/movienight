@@ -1,7 +1,7 @@
 # movienight
 let's not fight over choosing a movie anymore
 
-this baby app chooses a movie from your movie list at random
+this baby app chooses a movie from your movie list at random and can filter too
 
 ### install dependencies
 `pip3 install -r requirements.txt`
