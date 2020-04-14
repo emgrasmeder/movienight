@@ -9,3 +9,5 @@ this baby app chooses a movie from your movie list at random
 ### run
 `python3 src/main/selector.py resources/movies.csv`
 
+### run tests
+`./run.sh unittest`
