@@ -15,4 +15,3 @@ this baby app chooses a movie from your movie list at random and can filter too
 ### run in docker
 docker build --tag movienight .
 docker run movienight -i
->>>>>>> em #0 Put app into docker, because we want to host it so we should containerize it
