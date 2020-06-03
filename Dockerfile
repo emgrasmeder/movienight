@@ -1,4 +1,5 @@
 FROM python:3.8-slim
+RUN apt-get -y update && apt-get -y upgrade && apt-get -y install libblas-dev liblapack-dev libatlas-base-dev gfortran
 
 COPY requirements.txt .
 
