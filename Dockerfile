@@ -1,8 +1,8 @@
-FROM python:3.8-slim-buster
+FROM python:3.8-slim
 
 COPY requirements.txt .
 
-RUN pip install --quiet -r requirements.txt
+RUN pip install -r requirements.txt
 
 COPY src ./src
 COPY resources ./resources
