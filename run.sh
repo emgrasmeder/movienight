@@ -2,7 +2,7 @@
 
 __dev_server(){
   (
-  app="movienight_app"
+  app="movie_night_app"
   docker stop ${app}
   docker rm ${app}
   docker build -t ${app} .
@@ -14,15 +14,15 @@ __dev_server(){
 
 __end_to_end_test() {
   (
-    cd src/tests/
+    cd tests/
     echo "I'm in folder $(pwd)"
     echo "Tests should run here"
   )
 }
 
-__unittest() {
+__unit_test() {
   (
-    python3 -m unittest -v src/tests/test*.py
+    python3 -m pytest -v tests/test*.py
   )
 }
 

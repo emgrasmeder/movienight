@@ -1,15 +1,32 @@
-FROM python:3.8-slim
-RUN apt-get -y update && apt-get -y upgrade && apt-get -y install libblas-dev liblapack-dev libatlas-base-dev gfortran
+FROM python:3.10-slim AS base
 
-COPY requirements.txt .
+ENV POETRY_HOME=/opt/poetry \
+    POETRY_NO_INTERACTION=1 \
+    POETRY_VERSION=1.2.1 \
+    POETRY_VIRTUALENVS_IN_PROJECT=1
 
-RUN pip install -r requirements.txt
+ENV PATH="$POETRY_HOME/bin:$PATH"
 
-COPY src ./src
+
+FROM base AS builder
+RUN apt-get update \
+    && apt-get install --no-install-recommends -y curl
+
+RUN curl -sSL https://install.python-poetry.org | python3 -
+
+WORKDIR /src
+COPY poetry.lock pyproject.toml ./
+
+RUN poetry install --no-ansi --no-dev --no-interaction --no-root
+
+
+FROM builder AS final
+
+ENV PATH="/src/.venv/bin:$PATH"
+
+WORKDIR /app
+COPY --from=builder /src/.venv ./venv
+COPY movie_night/ ./movie_night
 COPY resources ./resources
 
-EXPOSE 5000
-
-#ENTRYPOINT ["tail", "-f", "/dev/null"]
-#ENTRYPOINT ["python", "src/main/selector.py", "resources/movies.csv"]
-CMD ["python", "src/main/server.py"]
+CMD ["python", "movie_night/app.py"]

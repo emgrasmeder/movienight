@@ -1,17 +1,17 @@
-# movienight
+# movie-night
 let's not fight over choosing a movie anymore
 
 this baby app chooses a movie from your movie list at random and can filter too
 
 ### install dependencies
-`pip3 install -r requirements.txt`
+`poetry install`
 
 ### run
-`python3 src/main/selector.py resources/movies.csv`
+`python movie_night/selector.py resources/movies.csv`
 
 ### run tests
-`./run.sh unittest`
+`./run.sh unit_test`
 
 ### run in docker
-docker build --tag movienight .
-docker run movienight -i
+docker build --tag movie-night-app .
+docker run -p 80:80 movie-night-app
