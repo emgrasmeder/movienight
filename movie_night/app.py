@@ -1,11 +1,15 @@
-from flask import Flask
+from fastapi import FastAPI
+from uvicorn import run
 import selector
 
+app = FastAPI()
 
-app = Flask(__name__)
-@app.route("/")
-def hello():
-    return selector.choose(selector.read_csv("resources/movies.csv"))
+
+@app.get("/")
+def root():
+    movie = selector.choose(selector.read_csv("resources/movies.csv"))
+    return f"Tonight we watch: {movie}!"
+
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=int("5000"), debug=True)
+    run("app:app", host="0.0.0.0", port=80, reload=True)

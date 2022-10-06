@@ -1,6 +1,6 @@
-import pytest
-from pathlib import Path
 from time import time
+
+import pytest
 
 from movie_night import filters, selector
 
