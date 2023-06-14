@@ -10,7 +10,7 @@ poetry install
 
 ### run
 ```bash
-python movie_night/selector.py resources/movies.csv
+poetry run python movie_night/selector.py resources/movies.csv
 ```
 
 ### run tests
