@@ -22,7 +22,7 @@ __end_to_end_test() {
 
 __unit_test() {
   (
-    python3 -m pytest -v tests/test*.py
+    poetry run python3 -m pytest -v tests/test*.py
   )
 }
 
