@@ -5,7 +5,7 @@ description = "An extensible, simple movie recomendation app."
 authors = ["Em <@emgrasmeder>", "Pao <@psrmx>"]
 
 [tool.poetry.dependencies]
-fastapi = "^0.85.0"
+fastapi = "^0.109.1"
 numpy = "^1.23.3"
 python = "^3.10"
 uvicorn = "^0.18.3"
